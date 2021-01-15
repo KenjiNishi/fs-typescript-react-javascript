@@ -2,11 +2,17 @@
 import * as mongoose from 'mongoose';
 import { ModificationNote } from '../common/model';
 
+export enum situacaoPedido {
+    analise = 0,
+    aprovado = 1,
+    cancelado = -1
+}
+
 const schema = new mongoose.Schema({
     numero: {type: String, required: true, unique: true},
     data: {type: Date, required: true},
     descricao: {type: String, required: true},
-    situacao: {type: String, required: true, default: "Em análise"},
+    situacao: {type: Number, required: true, default: situacaoPedido.analise},
     
     itens :[{
         codigo: {type: String, required: true},
@@ -36,7 +42,7 @@ export interface IPedido {
     numero: Number;
     data: Date;
     descricao: String;
-    situacao: String;
+    situacao: Number;
 
     itens: Array<IItensPedido>;
    

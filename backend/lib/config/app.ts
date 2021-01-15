@@ -6,12 +6,14 @@ import environment from "../environment";
 
 import { CommonRoutes } from "../routes/common_routes"
 import { ItemRoutes} from "../routes/itens_route"
+import { PedidoRoutes } from "../routes/pedidos_routes"
 class App {
    public app: express.Application;
 
 
    private common_routes: CommonRoutes = new CommonRoutes();
    private item_routes: ItemRoutes = new ItemRoutes();
+   private pedido_routes: PedidoRoutes = new PedidoRoutes();
 
    constructor() {
       this.app = express();
@@ -19,7 +21,7 @@ class App {
       this.mongoSetup();
 
       this.item_routes.route(this.app);
-      
+      this.pedido_routes.route(this.app);
       this.common_routes.route(this.app);
    }
 
