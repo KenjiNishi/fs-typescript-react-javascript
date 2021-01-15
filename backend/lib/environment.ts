@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 enum Environments {
     local_environment = 'local',
     dev_environment = 'dev',
@@ -12,7 +14,7 @@ class Environment {
     }
 
     getDBUri() : string {
-        return ("mongodb+srv://nsw:4253@cluster0.hxfvg.mongodb.net/"+this.getDBName()+"?retryWrites=true&w=majority")
+        return (process.env.MDB_URI+this.getDBName()+"?retryWrites=true&w=majority")
     }
     
     getPort(): Number {

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+require('dotenv').config();
 var Environments;
 (function (Environments) {
     Environments["local_environment"] = "local";
@@ -11,7 +12,7 @@ class Environment {
         this.environment = environment;
     }
     getDBUri() {
-        return ("mongodb+srv://nsw:4253@cluster0.hxfvg.mongodb.net/" + this.getDBName() + "?retryWrites=true&w=majority");
+        return (process.env.MDB_URI + this.getDBName() + "?retryWrites=true&w=majority");
     }
     getPort() {
         if (this.environment === Environments.prod_environment) {

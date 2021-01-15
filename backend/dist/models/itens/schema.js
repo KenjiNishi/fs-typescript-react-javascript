@@ -1,5 +1,6 @@
 "use strict";
 // Interface e Schema da tabela
+// Codigo de um item nao pode ser modificado, pois o mesmo é usado como chave unica.*
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
 const model_1 = require("../common/model");
