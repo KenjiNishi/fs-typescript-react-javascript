@@ -10,13 +10,13 @@ class ItemRoutes {
         app.post('/api/item', (req, res) => {
             this.item_controller.create_item(req, res);
         });
-        app.get('/api/item/:id', (req, res) => {
+        app.get('/api/item/:codigo', (req, res) => {
             this.item_controller.get_item(req, res);
         });
-        app.put('/api/item/:id', (req, res) => {
+        app.put('/api/item/:codigo', (req, res) => {
             this.item_controller.update_item(req, res);
         });
-        app.delete('/api/item/:id', (req, res) => {
+        app.delete('/api/item/:codigo', (req, res) => {
             this.item_controller.delete_item(req, res);
         });
     }

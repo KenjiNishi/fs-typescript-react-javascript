@@ -33,8 +33,8 @@ class ItemController {
         }
     }
     get_item(req, res) {
-        if (req.params.id) {
-            const item_filter = { _id: req.params.id };
+        if (req.params.codigo) {
+            const item_filter = { codigo: req.params.codigo };
             this.item_service.filterItem(item_filter, (err, item_data) => {
                 if (err) {
                     service_1.mongoError(err, res);
@@ -49,8 +49,8 @@ class ItemController {
         }
     }
     update_item(req, res) {
-        if (req.params.id && req.body.name || req.body.valorU || req.body.codigo) {
-            const item_filter = { _id: req.params.id };
+        if (req.params.codigo && req.body.name || req.body.valorU || req.body.codigo) {
+            const item_filter = { codigo: req.params.codigo };
             this.item_service.filterItem(item_filter, (err, item_data) => {
                 if (err) {
                     service_1.mongoError(err, res);
@@ -62,10 +62,10 @@ class ItemController {
                         modification_note: 'Dados do item foram alterados'
                     });
                     const item_params = {
-                        _id: req.params.id,
+                        _id: item_data._id,
                         name: req.body.name ? req.body.name : item_data.name,
                         valorU: req.body.valorU ? req.body.valorU : item_data.valorU,
-                        codigo: req.body.codigo ? req.body.codigo : item_data.codigo,
+                        codigo: item_data.codigo,
                         modification_notes: item_data.modification_notes
                     };
                     this.item_service.updateItem(item_params, (err) => {
@@ -87,8 +87,8 @@ class ItemController {
         }
     }
     delete_item(req, res) {
-        if (req.params.id) {
-            this.item_service.deleteItem(req.params.id, (err, delete_details) => {
+        if (req.params.codigo) {
+            this.item_service.deleteItem(req.params.codigo, (err, delete_details) => {
                 if (err) {
                     service_1.mongoError(err, res);
                 }

@@ -11,15 +11,15 @@ export class ItemRoutes {
             this.item_controller.create_item(req, res);
         });
 
-        app.get('/api/item/:id', (req: Request, res: Response) => {
+        app.get('/api/item/:codigo', (req: Request, res: Response) => {
             this.item_controller.get_item(req, res);
         });
 
-        app.put('/api/item/:id', (req: Request, res: Response) => {
+        app.put('/api/item/:codigo', (req: Request, res: Response) => {
             this.item_controller.update_item(req, res);
         });
 
-        app.delete('/api/item/:id', (req: Request, res: Response) => {
+        app.delete('/api/item/:codigo', (req: Request, res: Response) => {
             this.item_controller.delete_item(req, res);
         });
 

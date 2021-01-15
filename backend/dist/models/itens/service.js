@@ -10,11 +10,11 @@ class ItemService {
         schema_1.default.findOne(query, callback);
     }
     updateItem(item_params, callback) {
-        const query = { _id: item_params._id };
+        const query = { codigo: item_params.codigo };
         schema_1.default.findOneAndUpdate(query, item_params, callback);
     }
     deleteItem(_id, callback) {
-        const query = { _id: _id };
+        const query = { codigo: _id };
         schema_1.default.deleteOne(query, callback);
     }
 }
