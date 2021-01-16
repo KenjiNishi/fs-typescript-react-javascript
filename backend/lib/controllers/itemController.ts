@@ -33,6 +33,16 @@ export class ItemController {
             insufficientParameters(res);
         }
     }
+    public list_itens(req: Request, res: Response){
+        this.item_service.listItens((err: any, itens_data: IItem) => {
+            if (err) { 
+                mongoError(err, res);
+            } else {
+                successResponse('Itens listados com sucesso!', itens_data, res)
+            }
+        })
+
+    }
 
     public get_item(req: Request, res: Response) {
         if (req.params.codigo) {

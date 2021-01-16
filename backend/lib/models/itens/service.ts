@@ -13,6 +13,10 @@ export default class ItemService {
         itens.findOne(query, callback);
     }
 
+    public listItens(callback: any){
+        itens.find(callback);
+    }
+
     public updateItem(item_params: IItem, callback: any) {
         const query = { codigo: item_params.codigo };
         itens.findOneAndUpdate(query, item_params, callback);

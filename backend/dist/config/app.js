@@ -6,14 +6,17 @@ const mongoose = require("mongoose");
 const environment_1 = require("../environment");
 const common_routes_1 = require("../routes/common_routes");
 const itens_route_1 = require("../routes/itens_route");
+const pedidos_routes_1 = require("../routes/pedidos_routes");
 class App {
     constructor() {
         this.common_routes = new common_routes_1.CommonRoutes();
         this.item_routes = new itens_route_1.ItemRoutes();
+        this.pedido_routes = new pedidos_routes_1.PedidoRoutes();
         this.app = express();
         this.config();
         this.mongoSetup();
         this.item_routes.route(this.app);
+        this.pedido_routes.route(this.app);
         this.common_routes.route(this.app);
     }
     config() {

@@ -26,10 +26,10 @@ const schema = new mongoose.Schema({
 
     modification_notes: [ModificationNote]
 });
-export default mongoose.model('itens', schema);
+export default mongoose.model('pedidos', schema);
 
 
-export interface IItensPedido{
+interface IItensPedido{
     codigo: String;
     quantidade: Number;
     valorUnitario: Number;

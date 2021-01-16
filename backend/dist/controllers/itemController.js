@@ -32,6 +32,16 @@ class ItemController {
             service_1.insufficientParameters(res);
         }
     }
+    list_itens(req, res) {
+        this.item_service.listItens((err, itens_data) => {
+            if (err) {
+                service_1.mongoError(err, res);
+            }
+            else {
+                service_1.successResponse('Itens listados com sucesso!', itens_data, res);
+            }
+        });
+    }
     get_item(req, res) {
         if (req.params.codigo) {
             const item_filter = { codigo: req.params.codigo };

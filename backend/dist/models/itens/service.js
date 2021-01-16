@@ -9,6 +9,9 @@ class ItemService {
     filterItem(query, callback) {
         schema_1.default.findOne(query, callback);
     }
+    listItens(callback) {
+        schema_1.default.find(callback);
+    }
     updateItem(item_params, callback) {
         const query = { codigo: item_params.codigo };
         schema_1.default.findOneAndUpdate(query, item_params, callback);

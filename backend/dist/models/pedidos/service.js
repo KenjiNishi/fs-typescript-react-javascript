@@ -9,12 +9,14 @@ class PedidoService {
     filterPedido(query, callback) {
         schema_1.default.findOne(query, callback);
     }
-    updatePedido(pedido_params, callback) {
-        const query = { _id: pedido_params._id };
-        schema_1.default.findOneAndUpdate(query, pedido_params, callback);
+    aprovePedido(_id, callback) {
+        // TODO
+    }
+    cancelPedido(_id, callback) {
+        // TODO
     }
     deletePedido(_id, callback) {
-        const query = { _id: _id };
+        const query = { numero: _id };
         schema_1.default.deleteOne(query, callback);
     }
 }

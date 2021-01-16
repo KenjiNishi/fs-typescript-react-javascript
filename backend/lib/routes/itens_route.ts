@@ -11,6 +11,10 @@ export class ItemRoutes {
             this.item_controller.create_item(req, res);
         });
 
+        app.get('/api/item', (req: Request, res: Response) => {
+            this.item_controller.list_itens(req, res);
+        });
+
         app.get('/api/item/:codigo', (req: Request, res: Response) => {
             this.item_controller.get_item(req, res);
         });

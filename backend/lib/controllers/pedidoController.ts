@@ -17,7 +17,7 @@ export class PedidoController {
                 descricao: req.body.descricao,
                 situacao: situacaoPedido.analise,
 
-                itens: req.body.itens,
+                itens: [req.body.itens],
                 
                 modification_notes: [{
                     modified_on: new Date(Date.now()),
