@@ -13,11 +13,13 @@ export default class PedidoService {
         pedidos.findOne(query, callback);
     }
 
-    public aprovePedido(_id: String, callback: any) {
-        // TODO
+    public listPedidos(callback: any){
+        pedidos.find(callback);
     }
-    public cancelPedido(_id: String, callback: any) { 
-        // TODO
+
+    public updatePedido(pedido_params: IPedido, callback: any) {
+        const query = { numero: pedido_params.numero };
+        pedidos.findOneAndUpdate(query, pedido_params, callback);
     }
     
     public deletePedido(_id: String, callback: any) {

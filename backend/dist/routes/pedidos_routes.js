@@ -10,11 +10,20 @@ class PedidoRoutes {
         app.post('/api/pedido', (req, res) => {
             this.pedido_controller.create_pedido(req, res);
         });
+        app.get('/api/pedido', (req, res) => {
+            this.pedido_controller.list_pedidos(req, res);
+        });
         app.get('/api/pedido/:numero', (req, res) => {
             this.pedido_controller.get_pedido(req, res);
         });
         app.delete('/api/pedido/:numero', (req, res) => {
             this.pedido_controller.delete_pedido(req, res);
+        });
+        app.put('/api/pedido/aprove/:numero', (req, res) => {
+            this.pedido_controller.aprove_pedido(req, res);
+        });
+        app.put('/api/pedido/cancel/:numero', (req, res) => {
+            this.pedido_controller.cancel_pedido(req, res);
         });
     }
 }

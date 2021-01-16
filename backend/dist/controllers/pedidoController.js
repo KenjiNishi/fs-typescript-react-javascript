@@ -15,7 +15,7 @@ class PedidoController {
                 data: req.body.data,
                 descricao: req.body.descricao,
                 situacao: schema_1.situacaoPedido.analise,
-                itens: [req.body.itens],
+                itens: req.body.itens,
                 modification_notes: [{
                         modified_on: new Date(Date.now()),
                         modified_by: null,
@@ -34,6 +34,16 @@ class PedidoController {
         else {
             service_1.insufficientParameters(res);
         }
+    }
+    list_pedidos(req, res) {
+        this.pedido_service.listPedidos((err, pedidos_data) => {
+            if (err) {
+                service_1.mongoError(err, res);
+            }
+            else {
+                service_1.successResponse('Pedidos listados com sucesso!', pedidos_data, res);
+            }
+        });
     }
     get_pedido(req, res) {
         if (req.params.numero) {
@@ -62,6 +72,86 @@ class PedidoController {
                 }
                 else {
                     service_1.failureResponse('Pedido invalido', null, res);
+                }
+            });
+        }
+        else {
+            service_1.insufficientParameters(res);
+        }
+    }
+    cancel_pedido(req, res) {
+        if (req.params.numero) {
+            const pedido_filter = { numero: req.params.numero };
+            this.pedido_service.filterPedido(pedido_filter, (err, pedido_data) => {
+                if (err) {
+                    service_1.mongoError(err, res);
+                }
+                else if (pedido_data) {
+                    pedido_data.modification_notes.push({
+                        modified_on: new Date(Date.now()),
+                        modified_by: null,
+                        modification_note: 'Pedido cancelado'
+                    });
+                    const pedido_cancelado = {
+                        _id: pedido_data._id,
+                        numero: pedido_data.numero,
+                        data: pedido_data.data,
+                        descricao: pedido_data.descricao,
+                        situacao: schema_1.situacaoPedido.cancelado,
+                        itens: pedido_data.itens,
+                        modification_notes: pedido_data.modification_notes
+                    };
+                    this.pedido_service.updatePedido(pedido_cancelado, (err) => {
+                        if (err) {
+                            service_1.mongoError(err, res);
+                        }
+                        else {
+                            service_1.successResponse('Pedido cancelado com sucesso!', null, res);
+                        }
+                    });
+                }
+                else {
+                    service_1.failureResponse('Item invalido', null, res);
+                }
+            });
+        }
+        else {
+            service_1.insufficientParameters(res);
+        }
+    }
+    aprove_pedido(req, res) {
+        if (req.params.numero) {
+            const pedido_filter = { numero: req.params.numero };
+            this.pedido_service.filterPedido(pedido_filter, (err, pedido_data) => {
+                if (err) {
+                    service_1.mongoError(err, res);
+                }
+                else if (pedido_data) {
+                    pedido_data.modification_notes.push({
+                        modified_on: new Date(Date.now()),
+                        modified_by: null,
+                        modification_note: 'Pedido aprovado'
+                    });
+                    const pedido_aprovado = {
+                        _id: pedido_data._id,
+                        numero: pedido_data.numero,
+                        data: pedido_data.data,
+                        descricao: pedido_data.descricao,
+                        situacao: schema_1.situacaoPedido.aprovado,
+                        itens: pedido_data.itens,
+                        modification_notes: pedido_data.modification_notes
+                    };
+                    this.pedido_service.updatePedido(pedido_aprovado, (err) => {
+                        if (err) {
+                            service_1.mongoError(err, res);
+                        }
+                        else {
+                            service_1.successResponse('Pedido aprovado com sucesso!', null, res);
+                        }
+                    });
+                }
+                else {
+                    service_1.failureResponse('Item invalido', null, res);
                 }
             });
         }
