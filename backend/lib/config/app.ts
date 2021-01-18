@@ -2,6 +2,8 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as mongoose from 'mongoose';
 
+const cors = require('cors');
+
 import environment from "../environment";
 
 import { CommonRoutes } from "../routes/common_routes"
@@ -26,6 +28,7 @@ class App {
    }
 
    private config(): void {
+      this.app.use(cors());
       //application/json e application/x-www-form-urlencoded
       this.app.use(bodyParser.json());
       this.app.use(bodyParser.urlencoded({ extended: false }));

@@ -37,4 +37,4 @@ class Environment {
         }
     }
 }
-exports.default = new Environment(Environments.local_environment);
+exports.default = new Environment(Environments.dev_environment);

@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const cors = require('cors');
 const environment_1 = require("../environment");
 const common_routes_1 = require("../routes/common_routes");
 const itens_route_1 = require("../routes/itens_route");
@@ -20,6 +21,7 @@ class App {
         this.common_routes.route(this.app);
     }
     config() {
+        this.app.use(cors());
         //application/json e application/x-www-form-urlencoded
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));

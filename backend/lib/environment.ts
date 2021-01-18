@@ -38,4 +38,4 @@ class Environment {
     }
 }
 
-export default new Environment(Environments.local_environment);
+export default new Environment(Environments.dev_environment);
