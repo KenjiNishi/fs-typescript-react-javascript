@@ -32,7 +32,7 @@ class ItemsList extends Component {
     return (
       <div>
         <h3>Logged Items</h3>
-        <table>
+        <table className="tabela1">
           <thead>
             <tr>
               <th>Produto</th>
