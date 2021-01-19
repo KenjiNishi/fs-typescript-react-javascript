@@ -44,16 +44,17 @@ class ItemEdit extends Component {
           name: this.state.nome,
           valorU: this.state.valor
         };
-    
-        this.props.editItem(this.props.item.codigo, changes);
-        this.props.fetchItems();
+        if (changes.name !== '' || changes.valorU !== '') {
+          this.props.editItem(this.props.item.codigo, changes);
+          this.props.fetchItems();
+        }
         this.props.history.push('/')
         
       }
   
     render() {
         return (
-          <div>
+          <div className='container'>
             <div>
               <form onSubmit={this.onSubmit}>
                 <h1>Editando informações:</h1>
@@ -81,7 +82,7 @@ class ItemEdit extends Component {
                     />
                 </div>
                 <br />
-                <button type="submit">Atualizar</button>
+                <button type="submit">Atualizar</button> <button onClick={()=>{this.props.history.push('/')}}>Cancelar</button>
             </form>
             </div>
           </div>

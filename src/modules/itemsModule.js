@@ -6,11 +6,12 @@ import ItemForm from "../components/item-create";
 export default class itemsModule extends Component {
     render() {
         return (
-            <div>
+            <div className="container">
+                <hr />
                 <ItemForm />
                 <hr />
                 <ItemsList />
-                
+                <hr />
             </div>
         )
     }

@@ -15,7 +15,7 @@ const Item = props => (
             props.deleteItem(props.item.codigo); props.fetchItems()
           }}>Deletar</button> 
           
-          <Link to={"/editItem/"+props.item.codigo} onClick={() => {console.log('editing')}}> <button>Editar</button></Link> 
+          <Link to={"/editItem/"+props.item.codigo} onClick={() => {}}> <button>Editar</button></Link> 
       </p>
     </td>
   </tr>
@@ -29,16 +29,6 @@ class ItemsList extends Component {
       selectedItem : {codigo:'', nome:'', valor:'' }
     }
   }
-
-  togglePopup = (item) => {
-    console.log(item)
-    this.setState({
-      popup: !this.state.popup,
-      selectedItem: {codigo: item.codigo, nome: item.name, valor: item.valorU}
-    },
-      () => {console.log(this.state)}
-    );
-  };
 
   componentDidMount() {
     this.props.fetchItems();
@@ -54,7 +44,7 @@ class ItemsList extends Component {
 
   render() {
     return (
-      <div>
+      <div className='container'>
         <h3>Logged Items</h3>
         <table className="tabela1">
           <thead>

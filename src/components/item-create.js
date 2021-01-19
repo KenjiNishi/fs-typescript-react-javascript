@@ -37,10 +37,11 @@ class ItemForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className='container'>
         <h3>Registrar novo produto</h3>
         <form action='' onSubmit={this.onSubmit} id="itemForm">
-            <div>
+          <div className='row'>
+            <div className='col'>
                 <label>Codigo: </label><br/>
                 <input
                 type="text"
@@ -49,20 +50,18 @@ class ItemForm extends Component {
                 value={this.state.codigo}
                 />
             </div>
-            <br />
 
-            <div>
-                <label>Produto: </label><br/>
-                <input
-                type="text"
-                name="nome"
-                onChange={this.onChange}
-                value={this.state.nome}
-                />
+            <div className='col'>
+              <label>Produto: </label><br/>
+              <input
+              type="text"
+              name="nome"
+              onChange={this.onChange}
+              value={this.state.nome}
+              />
             </div> 
-            <br />
-          
-            <div>
+
+            <div className='col'>
                 <label>Valor: </label><br/>
                 <input
                 type="number" step="0.01" min="0"
@@ -71,9 +70,9 @@ class ItemForm extends Component {
                 value={this.state.valor}
                 />
             </div>
-            <br />
-
-            <button type="submit">Registrar</button>
+          </div>
+          <br/>
+          <button type="submit">Registrar</button>
         </form>
       </div>
     );
