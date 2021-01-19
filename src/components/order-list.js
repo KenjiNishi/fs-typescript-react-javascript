@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Container, Row, Col, Card, ListGroup} from 'react-bootstrap';
 
-import { fetchOrders } from '../redux/actions/orderActions';
+import { fetchOrders, cancelOrder, approveOrder} from '../redux/actions/orderActions';
 
 const Order = props => {
     var cardBorder = (status) =>{switch(status){
@@ -36,10 +36,12 @@ const Order = props => {
             return(
                 <div>
                 <button onClick={() => { 
-                    props.fetchOrders()
+                    props.approveAction(props.order.numero)
+                    props.fetchOrders();
                 }}>Aprovar</button> 
                 <button onClick={() => { 
-                    props.fetchOrders()
+                    props.cancelAction(props.order.numero)
+                    props.fetchOrders();
                 }}>Cancelar</button>
                 </div>
             )
@@ -120,7 +122,14 @@ class OrdersList extends Component {
 
     orderList() {
         return this.props.orders.map(currentorder => {
-            return <Order order={currentorder} fetchOrders={this.props.fetchOrders} orderItemList={this.orderItemList} key={currentorder.numero}/>;
+            return <Order 
+                        order={currentorder} 
+                        fetchOrders={this.props.fetchOrders} 
+                        orderItemList={this.orderItemList} 
+                        approveAction={this.props.approveOrder} 
+                        cancelAction={this.props.cancelOrder} 
+                        key={currentorder.numero}
+                    />;
         })
     }
 
@@ -146,6 +155,8 @@ class OrdersList extends Component {
 
 OrdersList.propTypes = {
     fetchOrders: PropTypes.func.isRequired,
+    approveOrder: PropTypes.func.isRequired,
+    cancelOrder: PropTypes.func.isRequired,
     orders: PropTypes.array.isRequired
 };
 
@@ -154,4 +165,4 @@ const mapStateToProps = state => (
         orders: state.orders.orderList
     }
 );
-export default connect(mapStateToProps, { fetchOrders})(OrdersList);
+export default connect(mapStateToProps, { fetchOrders, cancelOrder, approveOrder })(OrdersList);
