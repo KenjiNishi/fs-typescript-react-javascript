@@ -1,8 +1,9 @@
-import { FETCH_ITEMS, CREATE_ITEM, DELETE_ITEM, EDIT_ITEM } from '../actions/types';
+import { FETCH_ITEMS, CREATE_ITEM, DELETE_ITEM, EDIT_ITEM, GET_ITEM } from '../actions/types';
 
 const initialState = {
   itemList: [],
-  createdItem: {}
+  createdItem: {},
+  selectedItem: {}
 };
 
 export default function(state = initialState, action) {
@@ -24,6 +25,12 @@ export default function(state = initialState, action) {
 
     case EDIT_ITEM:
       return state;
+
+    case GET_ITEM:
+      return {
+        ...state,
+        selectedItem: action.payload
+      };
 
     default:
       return state;

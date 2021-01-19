@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { fetchItems, deleteItem } from '../redux/actions/itemActions';
-import ItemEdit from './item-edit'
 
 const Item = props => (
   <tr>
@@ -15,9 +15,7 @@ const Item = props => (
             props.deleteItem(props.item.codigo); props.fetchItems()
           }}>Deletar</button> 
           
-          <button onClick={() => { 
-            console.log("TODO :( "); props.toggle(props.item) 
-          }}>Editar</button> 
+          <Link to={"/editItem/"+props.item.codigo} onClick={() => {console.log('editing')}}> <button>Editar</button></Link> 
       </p>
     </td>
   </tr>
@@ -49,15 +47,14 @@ class ItemsList extends Component {
 
   itemList() {
     return this.props.items.map(currentitem => {
-      return <Item item={currentitem} deleteItem={this.props.deleteItem} fetchItems={this.props.fetchItems} toggle={this.togglePopup} key={currentitem.codigo}/>;
+      return <Item item={currentitem} deleteItem={this.props.deleteItem} fetchItems={this.props.fetchItems} key={currentitem.codigo}/>;
     })
   }
+
 
   render() {
     return (
       <div>
-        {this.state.popup ? <ItemEdit toggle={this.togglePopup} item={this.state.selectedItem}/> : null}
-
         <h3>Logged Items</h3>
         <table className="tabela1">
           <thead>
@@ -88,4 +85,4 @@ const mapStateToProps = state => (
   items: state.items.itemList
 });
 
-export default connect(mapStateToProps, { fetchItems, deleteItem })(ItemsList);
+export default connect(mapStateToProps, { fetchItems, deleteItem})(ItemsList);

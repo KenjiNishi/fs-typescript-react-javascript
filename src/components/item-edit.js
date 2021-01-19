@@ -2,24 +2,39 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { editItem } from '../redux/actions/itemActions';
+import { editItem, fetchItems, getItem } from '../redux/actions/itemActions';
 
 class ItemEdit extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
-          codigo: '',
           nome: '',
           valor: ''
         };
+
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onChangeNome = this.onChangeNome.bind(this);
+        this.onChangeValor = this.onChangeValor.bind(this);
+
+        
       }
+    
+    componentDidMount() {
+      this.props.getItem(this.props.match.params.codigo)
 
-    handleClick = () => {
-        this.props.toggle();
-        };
+      //this.setState({nome: this.props.item.name, valor: this.props.item.valorU})
+    }
 
-    onChange(e) {
-      this.setState({ [e.target.name]: e.target.value });
+    onChangeNome(e) {
+      this.setState({
+        nome: e.target.value
+      })
+    }
+    onChangeValor(e) {
+      this.setState({
+        valor: e.target.value
+      })
     }
 
     onSubmit(e) {
@@ -30,27 +45,28 @@ class ItemEdit extends Component {
           valorU: this.state.valor
         };
     
-        this.props.editItem(this.state.codigo, changes);
+        this.props.editItem(this.props.item.codigo, changes);
         this.props.fetchItems();
-        this.handleClick(this.props.item);
+        this.props.history.push('/')
+        
       }
   
     render() {
         return (
-          <div className="modal">
-            <div className="modal_content">
-              <span className="close" onClick={this.handleClick}>&times;</span>
+          <div>
+            <div>
               <form onSubmit={this.onSubmit}>
-                <p>Editando informações do produto {this.props.item.codigo}</p>
+                <h1>Editando informações:</h1>
+                <h2>{this.props.item.codigo} - {this.props.item.name}</h2>
                 <br />
 
                 <div>
-                    <label>Produto: </label><br/>
+                    <label>Novo nome: </label><br/>
                     <input
                     type="text"
                     name="nome"
-                    onChange={this.onChange}
-                    value={this.props.item.nome}
+                    onChange={this.onChangeNome}
+                    value={this.state.nome}
                     />
                 </div> 
                 <br />
@@ -60,8 +76,8 @@ class ItemEdit extends Component {
                     <input
                     type="number" step="0.01" min="0"
                     name="valor"
-                    onChange={this.onChange}
-                    value={this.props.item.valor}
+                    onChange={this.onChangeValor}
+                    value={this.state.valor}
                     />
                 </div>
                 <br />
@@ -74,6 +90,15 @@ class ItemEdit extends Component {
 }
 
 ItemEdit.propTypes = {
-  editItem: PropTypes.func.isRequired
+  editItem: PropTypes.func.isRequired,
+  fetchItems: PropTypes.func.isRequired,
+  getItem: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired
 };
-export default connect(null, { editItem })(ItemEdit);
+
+const mapStateToProps = state => (
+  {
+  item: state.items.selectedItem
+});
+
+export default connect(mapStateToProps, { editItem, fetchItems, getItem })(ItemEdit);

@@ -1,4 +1,4 @@
-import { FETCH_ITEMS,CREATE_ITEM, DELETE_ITEM, EDIT_ITEM } from './types';
+import { FETCH_ITEMS,CREATE_ITEM, DELETE_ITEM, EDIT_ITEM, GET_ITEM } from './types';
 
 export const fetchItems = () => dispatch => {
   fetch('http://localhost:5000/api/item/' , {
@@ -8,6 +8,18 @@ export const fetchItems = () => dispatch => {
       dispatch({
         type: FETCH_ITEMS,
         payload: items.DATA
+      })
+    )
+};
+
+export const getItem = (codigo) => dispatch => {
+  fetch('http://localhost:5000/api/item/'+codigo , {
+    method: 'GET'})
+    .then(res => res.json())
+    .then(item =>
+      dispatch({
+        type: GET_ITEM,
+        payload: item.DATA
       })
     )
 };
