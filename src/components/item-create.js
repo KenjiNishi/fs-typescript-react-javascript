@@ -38,7 +38,7 @@ class ItemForm extends Component {
   render() {
     return (
       <div>
-        <h1>Registrar novo produto</h1>
+        <h3>Registrar novo produto</h3>
         <form action='' onSubmit={this.onSubmit} id="itemForm">
             <div>
                 <label>Codigo: </label><br/>

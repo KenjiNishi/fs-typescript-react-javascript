@@ -1,4 +1,4 @@
-import { FETCH_ITEMS, CREATE_ITEM } from './types';
+import { FETCH_ITEMS,CREATE_ITEM, DELETE_ITEM, EDIT_ITEM } from './types';
 
 export const fetchItems = () => dispatch => {
   fetch('http://localhost:5000/api/item/' , {
@@ -25,6 +25,39 @@ export const createItem = itemData => dispatch => {
       dispatch({
         type: CREATE_ITEM,
         payload: item.DATA
+      })
+    );
+};
+
+export const deleteItem = codigo => dispatch => {
+  fetch('http://localhost:5000/api/item/'+codigo, {
+    method: 'DELETE',
+    headers: {
+      'content-type': 'application/json'
+    }
+  })
+    .then(res => res.json())
+    .then(res =>
+      dispatch({
+        type: DELETE_ITEM,
+        payload: res
+      })
+    );
+};
+
+export const editItem = (codigo, changes) => dispatch => {
+  fetch('http://localhost:5000/api/item/'+codigo, {
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body : JSON.stringify(changes)
+  })
+    .then(res => res.json())
+    .then(res =>
+      dispatch({
+        type: EDIT_ITEM,
+        payload: res
       })
     );
 };
