@@ -45,7 +45,7 @@ class ItemsList extends Component {
   render() {
     return (
       <div className='container'>
-        <h3>Logged Items</h3>
+        <h3>Produtos registrados:</h3>
         <table className="tabela1">
           <thead>
             <tr>
