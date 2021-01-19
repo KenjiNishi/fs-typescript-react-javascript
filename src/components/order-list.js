@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
+import { Container, Row, Col, Card, ListGroup} from 'react-bootstrap';
 
 import { fetchOrders } from '../redux/actions/orderActions';
 
@@ -31,8 +31,28 @@ const Order = props => {
         }
     };
 
+    var showButtons = (status, props) => {
+        if (status===0){
+            return(
+                <div>
+                <button onClick={() => { 
+                    props.fetchOrders()
+                }}>Aprovar</button> 
+                <button onClick={() => { 
+                    props.fetchOrders()
+                }}>Cancelar</button>
+                </div>
+            )
+        }
+        else {
+            return(
+                <div></div>
+            )
+        }
+    }
+
     return(
-        <Card style={{ width: '40rem' }} border={cardBorder(props.order.situacao)}>
+        <Card style={{ width: '40rem', margin: '1rem'}} border={cardBorder(props.order.situacao)}>
         <Card.Body>
             <Container>
                 <Row>
@@ -55,12 +75,7 @@ const Order = props => {
                 </Row>
 
                 <Row>
-                    <button onClick={() => { 
-                        props.fetchOrders()
-                    }}>Aprovar</button> 
-                    <button onClick={() => { 
-                        props.fetchOrders()
-                    }}>Cancelar</button>
+                    {showButtons(props.order.situacao, props)}
                 </Row>
             </Container> 
         </Card.Body>
@@ -71,7 +86,7 @@ const Order = props => {
 const OrderItem = props => 
 {
     return(
-        <ListGroup.Item>
+        <ListGroup.Item style={{ margin: '1rem'}}>
             <Container>
                 <Row>
                     {props.item.codigo} 
