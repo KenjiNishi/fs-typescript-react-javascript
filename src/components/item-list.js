@@ -25,8 +25,6 @@ class ItemsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      popup: false,
-      selectedItem : {codigo:'', nome:'', valor:'' }
     }
   }
 

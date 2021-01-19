@@ -7,12 +7,12 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import { fetchOrders } from '../redux/actions/orderActions';
 
 const Order = props => (
-  <Card style={{ width: '20rem' }}>
+    <Card style={{ width: '20rem' }} border={props.setBorder(props.order.situacao)}>
       <Card.Body>
           <Container>
               <Row>
                   <Col>
-                    <p>Pedido {props.order.numero}</p>
+                    <p>Pedido {props.order.numero} ({props.setSituacao(props.order.situacao)})</p>
                   </Col>
                   <Col> 
                     <p>{props.order.data.substring(0,10)}</p>
@@ -24,7 +24,7 @@ const Order = props => (
                 </Row>
 
                 <Row>
-                    ITENS
+                    ITENS 
                 </Row>
 
                 <Row>
@@ -43,47 +43,75 @@ const Order = props => (
 )
 
 class OrdersList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+    constructor(props) {
+        super(props);
 
+        this.setCardBorder = this.setCardBorder.bind(this);
+
+        this.state = {
+
+        }
     }
-  }
 
-  componentDidMount() {
-    this.props.fetchOrders();
-  }
+    componentDidMount() {
+        this.props.fetchOrders();
+    }
+
+    setCardBorder(status){
+        switch(status){
+            case 0:
+                return "dark";
+            case 1:
+                return "success";
+            case -1:
+                return "danger";
+            default:
+                return "info";
+        }
+    }
+
+    setSituacao(status){
+        switch(status){
+            case 0:
+                return "Em Análise";
+            case 1:
+                return "Aprovado";
+            case -1:
+                return "Cancelado";
+            default:
+                return "no-status";
+        }
+    }
+
+    orderList() {
+        return this.props.orders.map(currentorder => {
+        return <Order order={currentorder} fetchOrders={this.props.fetchOrders} setSituacao={this.setSituacao} setBorder={this.setCardBorder} key={currentorder.numero}/>;
+        })
+    }
 
 
-  orderList() {
-    return this.props.orders.map(currentorder => {
-      return <Order order={currentorder} fetchOrders={this.props.fetchOrders} key={currentorder.numero}/>;
-    })
-  }
-
-
-  render() {
-    return (
-        <Container>
-            <Row>
-                <h3>Pedidos registrados:</h3>
-            </Row>
-            <Row>
-                { this.orderList() }
-            </Row>
-        </Container>
-    )
-  }
+    render() {
+        return (
+            <Container>
+                <Row>
+                    <h3>Pedidos registrados:</h3>
+                </Row>
+                <Row>
+                    { this.orderList() }
+                </Row>
+            </Container>
+        )
+    }
 }
 
 OrdersList.propTypes = {
-  fetchOrders: PropTypes.func.isRequired,
-  orders: PropTypes.array.isRequired
+    fetchOrders: PropTypes.func.isRequired,
+    orders: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => (
-  {
-  orders: state.orders.orderList
-});
-
+    {
+        orders: state.orders.orderList
+    }
+);
 export default connect(mapStateToProps, { fetchOrders})(OrdersList);
