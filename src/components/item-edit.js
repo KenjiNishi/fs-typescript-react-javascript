@@ -14,8 +14,8 @@ class ItemEdit extends Component {
         };
       }
 
-    handleClick = (x) => {
-        this.props.toggle(x);
+    handleClick = () => {
+        this.props.toggle();
         };
 
     onChange(e) {
