@@ -1,6 +1,15 @@
 import React from "react";
-import { useForm, useFieldArray} from 'react-hook-form';
+import { useForm, useFieldArray, useWatch} from 'react-hook-form';
 import { Container, Row, Col} from 'react-bootstrap';
+
+const PrecoDescontado = ({ control, index }) => {
+    const value = useWatch({
+      control,
+      name: `itens[${index}]`,
+      defaultValue: {}
+    });
+    return <span>{(value.valorUnitario || 0) * (1-(value.desconto/100) || 0)}</span>;
+  };
 
 function OrderCreate() {
     const { register, control, handleSubmit } = useForm();
@@ -33,7 +42,7 @@ function OrderCreate() {
                 <Row>
                     <Col md={2}>
                         <button type="button" onClick={() => append({})}>
-                            Novo Item
+                            Novo Item 
                         </button>
                     </Col>
                     
@@ -42,8 +51,12 @@ function OrderCreate() {
 
                 {fields.map(({ id, codigo, quantidade, valorUnitario, desconto}, index) => {
                     return (
-                        <Row key={id}>
-                            <Col md={2}>{index} <button type="button" onClick={() => remove(index)}>Remover</button></Col>
+                        <Container key={id}>
+                         <Row>
+                            <Col md={2}>{index} <button type="button" onClick={() => remove(index)}>Remover</button></Col> 
+                        </Row>
+
+                        <Row>
                             <Col md={3}>
                                 <label>Codigo: </label>
                                 <input
@@ -73,7 +86,7 @@ function OrderCreate() {
                                 />
                             </Col>
 
-                            <Col md={1}>
+                            <Col md={2}>
                                 <label>Desconto: </label>
                                 <select
                                     ref={register()}
@@ -87,7 +100,14 @@ function OrderCreate() {
                                     <option value="75">75%</option>
                                 </select>
                             </Col>
+
+                            <Col md={1}>
+                                <Row>Valor final:</Row> 
+                                <Row><PrecoDescontado control={control} index={index} /></Row>
+                            </Col>
                         </Row>
+                       <br/>
+                        </Container>
 
                     );
                 })}
