@@ -1,3 +1,11 @@
+/** 
+ *  Author: Willian Kenji Nishizawa 
+ *  GitHub: github.com/KenjiNishi
+ * 
+ *  This file contains the Redux actions for Orders;
+ *  Handles data fetching and dispatch to Reducers;
+ */
+
 import { FETCH_ORDERS,CREATE_ORDER, GET_ORDER, DELETE_ORDER, EDIT_ORDER, APPROVE_ORDER, CANCEL_ORDER} from './types';
 
 export const fetchOrders = () => dispatch => {
@@ -18,7 +26,7 @@ export const getItem = (numero) => dispatch => {
       .then(res => res.json())
       .then(order =>
         dispatch({
-          type: GET_ITEM,
+          type: GET_ORDER,
           payload: order.DATA
         })
       )

@@ -1,3 +1,10 @@
+/** 
+ *  Author: Willian Kenji Nishizawa 
+ *  GitHub: github.com/KenjiNishi
+ * 
+ *  This file contains the Redux actions types referenced by the Redux actions and Reducers.
+ */
+
 export const FETCH_ITEMS = 'FETCH_ITEMS';
 export const CREATE_ITEM = 'CREATE_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';

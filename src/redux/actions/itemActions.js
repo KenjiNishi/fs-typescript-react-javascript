@@ -1,3 +1,11 @@
+/** 
+ *  Author: Willian Kenji Nishizawa 
+ *  GitHub: github.com/KenjiNishi
+ * 
+ *  This file contains the Redux actions for Items;
+ *  Handles data fetching and dispatch to Reducers;
+ */
+
 import { FETCH_ITEMS,CREATE_ITEM, DELETE_ITEM, EDIT_ITEM, GET_ITEM } from './types';
 
 export const fetchItems = () => dispatch => {

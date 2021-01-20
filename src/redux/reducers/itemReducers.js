@@ -1,3 +1,11 @@
+/** 
+ *  Author: Willian Kenji Nishizawa 
+ *  GitHub: github.com/KenjiNishi
+ * 
+ *  Handles the dispatch from ItemActions;
+ *  Return a new Store State (with or without modifications).
+ */
+
 import { FETCH_ITEMS, CREATE_ITEM, DELETE_ITEM, EDIT_ITEM, GET_ITEM } from '../actions/types';
 
 const initialState = {

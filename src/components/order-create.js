@@ -1,3 +1,15 @@
+/** 
+ *  Author: Willian Kenji Nishizawa 
+ *  GitHub: github.com/KenjiNishi
+ * 
+ *  This file contains the form that creates new Orders;
+ *  React-hook-form allows for an easier way to implement dynamic forms compared to React's useState();
+ *  React-bootstrap components are used to make the layout more readable;
+ *  Will only create a new Order if the fields are set correctly;
+ *  
+ *  This page is connected to the Redux Store in order to get access to orderActions.
+ */
+
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { useForm, useFieldArray, useWatch, Controller} from 'react-hook-form';

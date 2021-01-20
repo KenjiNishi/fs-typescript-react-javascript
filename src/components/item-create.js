@@ -1,3 +1,13 @@
+/** 
+ *  Author: Willian Kenji Nishizawa 
+ *  GitHub: github.com/KenjiNishi
+ * 
+ *  This file contains the form that creates new Items;
+ *  Simple HTML elements inside a React component;
+ *  
+ *  This page is connected to the Redux Store in order to get access to itemActions.
+ */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';

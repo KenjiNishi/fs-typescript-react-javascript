@@ -1,3 +1,18 @@
+/** 
+ *  Author: Willian Kenji Nishizawa 
+ *  GitHub: github.com/KenjiNishi
+ * 
+ *  This file contains the the component that lists all the registered Orders;
+ *  React-bootstrap components are used to make the layout more readable;
+ *  I opted to use Cards and ListGroup for ease of use and customization;
+ *  
+ *  Will only create a new Order if the fields are set correctly;
+ *  If the Order is "in analysis" the user can approve or cancel the order. 
+ *  Otherwise, the user can delete the entry;
+ *  
+ *  This page is connected to the Redux Store in order to get access to orderActions.
+ */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';

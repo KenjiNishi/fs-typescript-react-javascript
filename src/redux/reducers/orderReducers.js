@@ -1,3 +1,11 @@
+/** 
+ *  Author: Willian Kenji Nishizawa 
+ *  GitHub: github.com/KenjiNishi
+ * 
+ *  Handles the dispatch from OrderActions;
+ *  Return a new Store State (with or without modifications).
+ */
+
 import { FETCH_ORDERS, GET_ORDER, CREATE_ORDER, DELETE_ORDER, EDIT_ORDER, APPROVE_ORDER, CANCEL_ORDER} from '../actions/types';
 
 const initialState = {

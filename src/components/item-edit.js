@@ -1,3 +1,14 @@
+/** 
+ *  Author: Willian Kenji Nishizawa 
+ *  GitHub: github.com/KenjiNishi
+ * 
+ *  This file contains the form that updates the information of an Item;
+ *  Given the asynchronous nature of itemActions, I didn't find a proper way to default the form
+ * fields values to the ones from GetItem; (uncontrollable/controllable components)
+ *  
+ *  This page is connected to the Redux Store in order to get access to itemActions.
+ */
+
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
