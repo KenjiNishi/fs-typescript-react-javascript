@@ -35,8 +35,9 @@ class App {
    }
 
    private mongoSetup(): void {
+      const URI = process.env.MONGODB_URI || environment.getDBUri();
       mongoose.connect(
-         environment.getDBUri(), 
+         URI, 
          { 
             useNewUrlParser: true, 
             useUnifiedTopology: true,

@@ -124,7 +124,7 @@ class OrdersList extends Component {
     }
 
     orderList() {
-        return this.props.orders.map(currentorder => {
+        return this.props.orders.sort().map(currentorder => {
             return <Order 
                         order={currentorder} 
                         fetchOrders={this.props.fetchOrders} 
