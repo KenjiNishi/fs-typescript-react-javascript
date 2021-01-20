@@ -31,8 +31,21 @@ function OrderCreate({createOrder}) {
         })
         data.total = total;
         console.log(data);
+
+        var Duplicate = false;
+        data.itens.map(item => item.codigo).sort().sort((codigo1, codigo2) => {
+            if (codigo1 === codigo2) Duplicate = true
+        })
+
+        if (!Duplicate){
+            createOrder(data);
+        }
+        else{
+            console.log('Itens duplicados no pedido!')
+        }
         
-        createOrder(data);
+        
+        
     } 
 
     return (
