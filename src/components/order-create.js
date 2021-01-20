@@ -8,7 +8,7 @@ const PrecoDescontado = ({ control, index }) => {
       name: `itens[${index}]`,
       defaultValue: {}
     });
-    return <span>{(value.valorUnitario || 0) * (1-(value.desconto/100) || 0)}</span>;
+    return <span>{(value.valorUnitario || 0) * (value.quantidade || 0) * (1-(value.desconto/100) || 0)}</span>;
   };
 
 function OrderCreate() {
