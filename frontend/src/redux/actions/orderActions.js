@@ -9,7 +9,7 @@
 import { FETCH_ORDERS,CREATE_ORDER, GET_ORDER, DELETE_ORDER, EDIT_ORDER, APPROVE_ORDER, CANCEL_ORDER} from './types';
 
 export const fetchOrders = () => dispatch => {
-  fetch('http://localhost:5000/api/pedido' , {
+  fetch('https://sances-test-backend.herokuapp.com/api/pedido' , {
     method: 'GET'})
     .then(res => res.json())
     .then(orders =>
@@ -21,7 +21,7 @@ export const fetchOrders = () => dispatch => {
 };
 
 export const getItem = (numero) => dispatch => {
-    fetch('http://localhost:5000/api/pedido/'+numero , {
+    fetch('https://sances-test-backend.herokuapp.com/api/pedido/'+numero , {
       method: 'GET'})
       .then(res => res.json())
       .then(order =>
@@ -33,7 +33,7 @@ export const getItem = (numero) => dispatch => {
   };
   
 export const createOrder = orderData => dispatch => {
-  fetch('http://localhost:5000/api/pedido', {
+  fetch('https://sances-test-backend.herokuapp.com/api/pedido', {
     method: 'POST',
     headers: {
       'content-type': 'application/json'
@@ -50,7 +50,7 @@ export const createOrder = orderData => dispatch => {
 };
 
 export const deleteOrder = numero => dispatch => {
-  fetch('http://localhost:5000/api/pedido/'+numero, {
+  fetch('https://sances-test-backend.herokuapp.com/api/pedido/'+numero, {
     method: 'DELETE',
     headers: {
       'content-type': 'application/json'
@@ -66,7 +66,7 @@ export const deleteOrder = numero => dispatch => {
 };
 
 export const editOrder = (numero, changes) => dispatch => {
-  fetch('http://localhost:5000/api/pedido/'+numero, {
+  fetch('https://sances-test-backend.herokuapp.com/api/pedido/'+numero, {
     method: 'PUT',
     headers: {
       'content-type': 'application/json'
@@ -83,7 +83,7 @@ export const editOrder = (numero, changes) => dispatch => {
 };
 
 export const approveOrder = numero => dispatch => {
-    fetch('http://localhost:5000/api/pedido/aprove/'+numero, {
+    fetch('https://sances-test-backend.herokuapp.com/api/pedido/aprove/'+numero, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json'
@@ -99,7 +99,7 @@ export const approveOrder = numero => dispatch => {
   };
 
   export const cancelOrder = numero => dispatch => {
-    fetch('http://localhost:5000/api/pedido/cancel/'+numero, {
+    fetch('https://sances-test-backend.herokuapp.com/api/pedido/cancel/'+numero, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json'

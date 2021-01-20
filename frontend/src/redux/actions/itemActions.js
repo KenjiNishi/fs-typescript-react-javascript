@@ -9,7 +9,7 @@
 import { FETCH_ITEMS,CREATE_ITEM, DELETE_ITEM, EDIT_ITEM, GET_ITEM } from './types';
 
 export const fetchItems = () => dispatch => {
-  fetch('http://localhost:5000/api/item/' , {
+  fetch('https://sances-test-backend.herokuapp.com/api/item/' , {
     method: 'GET'})
     .then(res => res.json())
     .then(items =>
@@ -21,7 +21,7 @@ export const fetchItems = () => dispatch => {
 };
 
 export const getItem = (codigo) => dispatch => {
-  fetch('http://localhost:5000/api/item/'+codigo , {
+  fetch('https://sances-test-backend.herokuapp.com/api/item/'+codigo , {
     method: 'GET'})
     .then(res => res.json())
     .then(item =>
@@ -33,7 +33,7 @@ export const getItem = (codigo) => dispatch => {
 };
 
 export const createItem = itemData => dispatch => {
-  fetch('http://localhost:5000/api/item/', {
+  fetch('https://sances-test-backend.herokuapp.com/api/item/', {
     method: 'POST',
     headers: {
       'content-type': 'application/json'
@@ -50,7 +50,7 @@ export const createItem = itemData => dispatch => {
 };
 
 export const deleteItem = codigo => dispatch => {
-  fetch('http://localhost:5000/api/item/'+codigo, {
+  fetch('https://sances-test-backend.herokuapp.com/api/item/'+codigo, {
     method: 'DELETE',
     headers: {
       'content-type': 'application/json'
@@ -66,7 +66,7 @@ export const deleteItem = codigo => dispatch => {
 };
 
 export const editItem = (codigo, changes) => dispatch => {
-  fetch('http://localhost:5000/api/item/'+codigo, {
+  fetch('https://sances-test-backend.herokuapp.com/api/item/'+codigo, {
     method: 'PUT',
     headers: {
       'content-type': 'application/json'
