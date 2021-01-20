@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { useForm, useFieldArray, useWatch, Controller} from 'react-hook-form';
 import { Container, Row, Col} from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -17,6 +18,8 @@ const PrecoDescontado = ({ control, index }) => {
   };
 
 function OrderCreate({createOrder}) {
+
+    const history = useHistory();
     const { register, control, handleSubmit } = useForm();
     const { fields, append, remove } = useFieldArray({
         control,
@@ -24,28 +27,30 @@ function OrderCreate({createOrder}) {
     });
 
     const onSubmit = (data) => {
-        let total = 0;
-        data.itens.forEach(item => {
-            item.valorTotal = item.valorUnitario * item.quantidade * (1-(item.desconto/100))
-            total += item.valorTotal
-        })
+        var total = 0;
+        var duplicate = true;
+
+        if (data.itens){
+            data.itens.forEach(item => {
+                item.valorTotal = item.valorUnitario * item.quantidade * (1-(item.desconto/100))
+                total += item.valorTotal
+            })
+            
+            duplicate = false;
+            data.itens.map(item => item.codigo).sort().sort((codigo1, codigo2) => {
+                if (codigo1 === codigo2) duplicate = true
+            })
+        }
+
         data.total = total;
-        console.log(data);
-
-        var Duplicate = false;
-        data.itens.map(item => item.codigo).sort().sort((codigo1, codigo2) => {
-            if (codigo1 === codigo2) Duplicate = true
-        })
-
-        if (!Duplicate){
+        if (!duplicate){
             createOrder(data);
+            history.push("/");
         }
         else{
-            console.log('Itens duplicados no pedido!')
+            console.log('Sem Itens ou Itens duplicados no pedido!')
+            history.push("/");
         }
-        
-        
-        
     } 
 
     return (
