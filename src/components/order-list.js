@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Container, Row, Col, Card, ListGroup} from 'react-bootstrap';
 
-import { fetchOrders, cancelOrder, approveOrder} from '../redux/actions/orderActions';
+import { fetchOrders, cancelOrder, approveOrder, deleteOrder} from '../redux/actions/orderActions';
 
 const Order = props => {
     var cardBorder = (status) =>{switch(status){
@@ -48,7 +48,10 @@ const Order = props => {
         }
         else {
             return(
-                <div></div>
+                <div><button onClick={() => { 
+                    props.deleteAction(props.order.numero)
+                    props.fetchOrders();
+                }}>Deletar</button></div>
             )
         }
     }
@@ -128,6 +131,7 @@ class OrdersList extends Component {
                         orderItemList={this.orderItemList} 
                         approveAction={this.props.approveOrder} 
                         cancelAction={this.props.cancelOrder} 
+                        deleteAction={this.props.deleteOrder}
                         key={currentorder.numero}
                     />;
         })
@@ -157,6 +161,7 @@ OrdersList.propTypes = {
     fetchOrders: PropTypes.func.isRequired,
     approveOrder: PropTypes.func.isRequired,
     cancelOrder: PropTypes.func.isRequired,
+    deleteOrder: PropTypes.func.isRequired,
     orders: PropTypes.array.isRequired
 };
 
@@ -165,4 +170,4 @@ const mapStateToProps = state => (
         orders: state.orders.orderList
     }
 );
-export default connect(mapStateToProps, { fetchOrders, cancelOrder, approveOrder })(OrdersList);
+export default connect(mapStateToProps, { fetchOrders, cancelOrder, approveOrder, deleteOrder })(OrdersList);
