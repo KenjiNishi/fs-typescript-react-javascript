@@ -1,6 +1,9 @@
 import React from "react";
 import { useForm, useFieldArray, useWatch} from 'react-hook-form';
 import { Container, Row, Col} from 'react-bootstrap';
+import { connect } from 'react-redux';
+
+import { createOrder} from '../redux/actions/orderActions';
 
 const PrecoDescontado = ({ control, index }) => {
     const value = useWatch({
@@ -19,6 +22,12 @@ function OrderCreate() {
     });
 
     const onSubmit = (data) => {
+        let total = 0;
+        data.itens.forEach(item => {
+            item.valorTotal = item.valorUnitario * item.quantidade * (1-(item.desconto/100))
+            total += item.valorTotal
+        })
+        data.total = total;
         console.log(data);
     } 
 
@@ -49,7 +58,7 @@ function OrderCreate() {
                 </Row>
                 <br/>
 
-                {fields.map(({ id, codigo, quantidade, valorUnitario, desconto}, index) => {
+                {fields.map(({ id, codigo, quantidade, valorUnitario, desconto, valorTotal}, index) => {
                     return (
                         <Container key={id}>
                          <Row>
@@ -60,7 +69,7 @@ function OrderCreate() {
                             <Col md={3}>
                                 <label>Codigo: </label>
                                 <input
-                                ref={register()}
+                                ref={register({required: true})}
                                 name={`itens[${index}].codigo`}
                                 defaultValue={codigo}
                                 />
@@ -69,7 +78,7 @@ function OrderCreate() {
                             <Col md={3}>
                                 <label>Quantidade: </label>
                                 <input
-                                    ref={register()}
+                                    ref={register({required: true})}
                                     type="number"
                                     name={`itens[${index}].quantidade`}
                                     defaultValue={quantidade}
@@ -79,7 +88,7 @@ function OrderCreate() {
                             <Col md={3}>
                                 <label>Preço unitário: </label>
                                 <input
-                                    ref={register()}
+                                    ref={register({required: true})}
                                     type="number"
                                     name={`itens[${index}].valorUnitario`}
                                     defaultValue={valorUnitario}
@@ -89,7 +98,7 @@ function OrderCreate() {
                             <Col md={2}>
                                 <label>Desconto: </label>
                                 <select
-                                    ref={register()}
+                                    ref={register({required: true})}
                                     name={`itens[${index}].desconto`}
                                     defaultValue={desconto}
                                 >
@@ -102,13 +111,12 @@ function OrderCreate() {
                             </Col>
 
                             <Col md={1}>
-                                <Row>Valor final:</Row> 
+                                <Row>Valor final:</Row>
                                 <Row><PrecoDescontado control={control} index={index} /></Row>
                             </Col>
                         </Row>
-                       <br/>
+                        <br/>
                         </Container>
-
                     );
                 })}
                 <Row>
@@ -119,4 +127,4 @@ function OrderCreate() {
     
   );
 }
-export default OrderCreate;
+export default connect(null, { createOrder }) (OrderCreate);
