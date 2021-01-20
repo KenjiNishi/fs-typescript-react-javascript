@@ -1,7 +1,9 @@
 import React from "react";
-import { useForm, useFieldArray, useWatch} from 'react-hook-form';
+import { useForm, useFieldArray, useWatch, Controller} from 'react-hook-form';
 import { Container, Row, Col} from 'react-bootstrap';
 import { connect } from 'react-redux';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 import { createOrder} from '../redux/actions/orderActions';
 
@@ -29,6 +31,7 @@ function OrderCreate() {
         })
         data.total = total;
         console.log(data);
+        //props.createOrder(data);
     } 
 
     return (
@@ -42,7 +45,19 @@ function OrderCreate() {
                 </Row>
                 <Row>
                     <Col md={1}><label>Data: </label></Col>
-                    <Col> <input type="text" name="data" placeholder="data" ref={register({required: true})}/> </Col>
+                    <Col> 
+                        <Controller
+                            name={'data'}
+                            control={control}
+                            render={({ onChange, value }) => (
+                                <DatePicker
+                                    selected={value}
+                                    onChange={onChange}
+                                    dateFormat="dd/MM/yyyy"
+                                />
+                            )}
+                        />
+                    </Col>
                 </Row>
                 <Row>
                     <Col md={1}><label>Descrição: </label></Col>
