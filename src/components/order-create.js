@@ -16,7 +16,7 @@ const PrecoDescontado = ({ control, index }) => {
     return <span>{(value.valorUnitario || 0) * (value.quantidade || 0) * (1-(value.desconto/100) || 0)}</span>;
   };
 
-function OrderCreate() {
+function OrderCreate({createOrder}) {
     const { register, control, handleSubmit } = useForm();
     const { fields, append, remove } = useFieldArray({
         control,
@@ -31,7 +31,8 @@ function OrderCreate() {
         })
         data.total = total;
         console.log(data);
-        //props.createOrder(data);
+        
+        createOrder(data);
     } 
 
     return (
@@ -94,7 +95,7 @@ function OrderCreate() {
                                 <label>Quantidade: </label>
                                 <input
                                     ref={register({required: true})}
-                                    type="number"
+                                    type="number" min="0"
                                     name={`itens[${index}].quantidade`}
                                     defaultValue={quantidade}
                                 />
@@ -104,7 +105,7 @@ function OrderCreate() {
                                 <label>Preço unitário: </label>
                                 <input
                                     ref={register({required: true})}
-                                    type="number"
+                                    type="number" step="0.01" min="0"
                                     name={`itens[${index}].valorUnitario`}
                                     defaultValue={valorUnitario}
                                 />
