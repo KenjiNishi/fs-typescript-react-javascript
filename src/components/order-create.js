@@ -19,19 +19,19 @@ function OrderCreate() {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <br/>
                 <Row>
-                    <Col sm={1}><label>Numero: </label></Col>
+                    <Col md={1}><label>Numero: </label></Col>
                     <Col><input type="text" name="numero" placeholder="Numero do pedido" ref={register({required: true})}/> </Col>
                 </Row>
                 <Row>
-                    <Col sm={1}><label>Data: </label></Col>
+                    <Col md={1}><label>Data: </label></Col>
                     <Col> <input type="text" name="data" placeholder="data" ref={register({required: true})}/> </Col>
                 </Row>
                 <Row>
-                    <Col sm={1}><label>Descrição: </label></Col>
+                    <Col md={1}><label>Descrição: </label></Col>
                     <Col> <input type="textfield" name="descricao" placeholder="descricao" ref={register({required: true})}/> </Col>
                 </Row>
                 <Row>
-                    <Col sm={2}>
+                    <Col md={2}>
                         <button type="button" onClick={() => append({})}>
                             Novo Item
                         </button>
@@ -43,8 +43,8 @@ function OrderCreate() {
                 {fields.map(({ id, codigo, quantidade, valorUnitario, desconto}, index) => {
                     return (
                         <Row key={id}>
-                            <Col sm={2}>{index} <button type="button" onClick={() => remove(index)}>Remover</button></Col>
-                            <Col sm={3}>
+                            <Col md={2}>{index} <button type="button" onClick={() => remove(index)}>Remover</button></Col>
+                            <Col md={3}>
                                 <label>Codigo: </label>
                                 <input
                                 ref={register()}
@@ -53,7 +53,7 @@ function OrderCreate() {
                                 />
                             </Col>
                             
-                            <Col sm={3}>
+                            <Col md={3}>
                                 <label>Quantidade: </label>
                                 <input
                                     ref={register()}
@@ -63,7 +63,7 @@ function OrderCreate() {
                                 />
                             </Col>
                             
-                            <Col sm={3}>
+                            <Col md={3}>
                                 <label>Preço unitário: </label>
                                 <input
                                     ref={register()}
@@ -73,7 +73,7 @@ function OrderCreate() {
                                 />
                             </Col>
 
-                            <Col sm={1}>
+                            <Col md={1}>
                                 <label>Desconto: </label>
                                 <select
                                     ref={register()}
@@ -93,10 +93,7 @@ function OrderCreate() {
                 })}
                 <Row>
                     <Col><input type="submit" /></Col>
-                    
-                </Row>
-                    
-                    
+                </Row> 
             </form>
         </Container>
     
