@@ -1,4 +1,4 @@
-Sances-DevTest
+Simple CRUD  ReactJs frontend + Typescript backend
 
 Inside ./backend/ : npm run dev
 
